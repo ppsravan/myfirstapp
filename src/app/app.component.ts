@@ -9,29 +9,31 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'Test App';
+  public breadcrumbs: Array<any> = [];
 
   constructor(titleService: Title, router: Router, activatedRoute: ActivatedRoute) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const title = this.getTitle(router.routerState, router.routerState.root).join('-');
+        this.breadcrumbs = [];
+        this.getBreadcrumbs(router.routerState, router.routerState.root);
+        const title = this.getTitle();
         titleService.setTitle(`${this.title} - ${title}`);
       }
     });
   }
 
-  getTitle(state, parent: ActivatedRoute) {
-    const data = [];
+  getTitle() {
+    return this.breadcrumbs.reduce((title, item) => title + item.title, '');
+  }
+
+  getBreadcrumbs(state, parent: ActivatedRoute): void {
+    // const data = [];
     if (parent && parent.snapshot.data && parent.snapshot.data.title) {
-      data.push(parent.snapshot.data.title);
+      this.breadcrumbs.push({ title: parent.snapshot.data.title, url: parent.snapshot.url, params: parent.snapshot.params });
     }
 
     if (state && parent) {
-      const title = this.getTitle(state, state.firstChild(parent));
-      if (title != null) {
-        data.push(title);
-      }
+      this.getBreadcrumbs(state, state.firstChild(parent));
     }
-
-    return data.length > 0 ? data : null;
   }
 }

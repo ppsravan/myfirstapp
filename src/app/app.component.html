@@ -13,12 +13,24 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="contact">Contact</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" routerLink="admin" id="adminDropdownMenuLink" routerLinkActive="active">Admin</a>
+        <div class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
+          <a class="dropdown-item" routerLink="admin/edit">Edit</a>
+          <a class="dropdown-item" routerLink="admin/manage">Manage</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
 <main class="container" role="main" style="padding-top:20px">
 
   <div class="row">
+    <div class="col-md-12">
+      <nav class="breadcrumb">
+        <a *ngFor="let item of breadcrumbs" [routerLink]="[item.url, item.params]" class="breadcrumb-item">{{item.title}}</a>
+      </nav>
+    </div>
     <div class="col-md-3">
       <ul class="list-group">
         <li class="list-group-item link" routerLinkActive="active" routerLink="home">Home</li>

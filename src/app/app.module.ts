@@ -10,6 +10,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule } from '@angular/router/src/router_module';
 import { AlertModule } from 'ngx-bootstrap';
+import { AdminmanageComponent } from './adminmanage/adminmanage.component';
+import { AdmineditComponent } from './adminedit/adminedit.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AlertModule } from 'ngx-bootstrap';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    AdminmanageComponent,
+    AdmineditComponent
   ],
   imports: [
     BrowserModule,
