@@ -12,7 +12,9 @@ import { RouterModule } from '@angular/router/src/router_module';
 import { AlertModule } from 'ngx-bootstrap';
 import { AdminmanageComponent } from './adminmanage/adminmanage.component';
 import { AdmineditComponent } from './adminedit/adminedit.component';
-
+import { RegisterService } from './register.service';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,10 @@ import { AdmineditComponent } from './adminedit/adminedit.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,6 @@
 <p>
-  adminedit works!
+  <button (click)="registerUser()" class="btn btn-default">Register</button>
 </p>
+
+<alert *ngIf="success" type="success" dismissible="true">User registered successfully!</alert>
+<alert *ngIf="failed" type="danger" dismissible="true">User registration failed!</alert>
