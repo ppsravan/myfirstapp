@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Form, FormsModule } from '@angular/forms';
+import { Form, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { AdmineditComponent } from './adminedit/adminedit.component';
 import { RegisterService } from './register.service';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -23,16 +25,18 @@ import { Observable } from 'rxjs/Observable';
     AboutComponent,
     ContactComponent,
     AdminmanageComponent,
-    AdmineditComponent
+    AdmineditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AlertModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [RegisterService],
+  providers: [RegisterService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { RegisterService } from './register.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'Test App';
   public breadcrumbs: Array<any> = [];
 
-  constructor(titleService: Title, router: Router, activatedRoute: ActivatedRoute) {
+  constructor(titleService: Title, private router: Router, activatedRoute: ActivatedRoute, private service: RegisterService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.breadcrumbs = [];
@@ -20,6 +21,19 @@ export class AppComponent {
         titleService.setTitle(`${this.title} - ${title}`);
       }
     });
+  }
+
+  public getUserName(): string {
+    return this.service.userName;
+  }
+
+  public isLogged() {
+    return this.service.isLogged;
+  }
+
+  public logout() {
+    this.service.logout();
+    this.router.navigate(['./login']);
   }
 
   getTitle() {
