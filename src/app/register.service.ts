@@ -15,9 +15,10 @@ export class RegisterService {
   }
 
   public registerUser(path: any, userData: any): Observable<any> {
-    const headerParams: HttpHeaders = new HttpHeaders();
-    headerParams.append('Content-Type', 'application/json');
-    return this.httpClient.post(ServiceUrl + path, userData, { headers: headerParams });
+    // const headerParams: HttpHeaders = new HttpHeaders();
+    // headerParams.append('Content-Type', 'application/json');
+    // return this.httpClient.post(ServiceUrl + path, userData, { headers: headerParams });
+    return this.httpClient.post(ServiceUrl + path, userData);
   }
 
   public loginUser(userId: string, password: string): Observable<any> {
@@ -52,9 +53,11 @@ export class RegisterService {
   }
 
   private postRequest(path: string, data: any): Observable<any> {
-    const headerParams: HttpHeaders = new HttpHeaders();
-    headerParams.append('Content-Type', 'application/json');
-    return this.httpClient.post(ServiceUrl + path, data, { headers: headerParams });
 
+    // No longer required as this is off-loaded to the http interceptor.
+    // const headerParams: HttpHeaders = new HttpHeaders();
+    // headerParams.append('Content-Type', 'application/json');
+    // return this.httpClient.post(ServiceUrl + path, data, { headers: headerParams });
+    return this.httpClient.post(ServiceUrl + path, data);
   }
 }

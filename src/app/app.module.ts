@@ -13,10 +13,13 @@ import { AlertModule } from 'ngx-bootstrap';
 import { AdminmanageComponent } from './adminmanage/adminmanage.component';
 import { AdmineditComponent } from './adminedit/adminedit.component';
 import { RegisterService } from './register.service';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { HttpHeaderInterceptor } from './http-header-interceptor';
+import { tr } from 'ngx-bootstrap/bs-moment/i18n/tr';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,15 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [RegisterService, AuthGuard],
+  providers: [
+    RegisterService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeaderInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
